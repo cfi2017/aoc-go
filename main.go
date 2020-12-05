@@ -8,16 +8,16 @@ import (
 )
 
 func main() {
-	input := GetInput(os.Args[1])
-	max, id := Compute(input)
+	input := getInput(os.Args[1])
+	max, id := compute(input)
 	fmt.Printf("max is %d, id is %d", max, id)
 }
 
-func ComputeInput(input string) (max, id uint16) {
-	return Compute(GetInput(input))
+func computeInput(input string) (max, id uint16) {
+	return compute(getInput(input))
 }
 
-func GetInput(input string) []string {
+func getInput(input string) []string {
 	bs, err := ioutil.ReadFile(input)
 	if err != nil {
 		panic(err)
@@ -25,10 +25,10 @@ func GetInput(input string) []string {
 	return strings.Split(string(bs), "\n")
 }
 
-func Compute(lines []string) (max, id uint16) {
+func compute(lines []string) (max, id uint16) {
 	var seats [1025]uint8
 	for _, line := range lines {
-		seat := Parse(line)
+		seat := parse(line)
 		seats[seat] = 1
 	}
 	for seats[id] == 0 {
@@ -45,7 +45,7 @@ func Compute(lines []string) (max, id uint16) {
 	return
 }
 
-func Parse(line string) (r uint16) {
+func parse(line string) (r uint16) {
 	for i := 0; i < 7; i++ {
 		r = r << 1
 		r += 1 - uint16((line[i]&4)>>2)

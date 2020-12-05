@@ -3,13 +3,15 @@ package main
 import (
   "fmt"
   "io/ioutil"
+  "os"
   "strings"
   "time"
 )
 
 func main() {
-  input := GetInput("input.txt")
-  Compute(input)
+  input := GetInput(os.Args[1])
+  max, id := Compute(input)
+  fmt.Printf("max is %d, id is %d", max, id)
 }
 
 func ComputeInput(input string) (max, id uint16) {

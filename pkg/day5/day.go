@@ -13,19 +13,19 @@ func (Day5) Solve(input string) (a, b int) {
 }
 
 func compute(lines []string) (max, id uint16) {
-	var seats [1025]uint8
+	var seats [1025]bool
 	for _, line := range lines {
 		seat := parse(line)
-		seats[seat] = 1
+		seats[seat] = true
 	}
-	for seats[id] == 0 {
+	for seats[id] {
 		id++
 	}
-	for seats[id] == 1 {
+	for seats[id] {
 		id++
 	}
 	max = id + 1
-	for seats[max] == 1 {
+	for seats[max] {
 		max++
 	}
 	max--

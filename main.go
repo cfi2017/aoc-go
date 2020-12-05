@@ -1,58 +1,22 @@
+/*
+Copyright © 2020 NAME HERE <EMAIL ADDRESS>
+
+Licensed under the Apache License, Version 2.0 (the "License");
+you may not use this file except in compliance with the License.
+You may obtain a copy of the License at
+
+    http://www.apache.org/licenses/LICENSE-2.0
+
+Unless required by applicable law or agreed to in writing, software
+distributed under the License is distributed on an "AS IS" BASIS,
+WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+See the License for the specific language governing permissions and
+limitations under the License.
+*/
 package main
 
-import (
-	"fmt"
-	"io/ioutil"
-	"os"
-	"strings"
-)
+import "github.com/cfi2017/aoc-go/cmd"
 
 func main() {
-	input := getInput(os.Args[1])
-	max, id := compute(input)
-	fmt.Printf("max is %d, id is %d", max, id)
-}
-
-func computeInput(input string) (max, id uint16) {
-	return compute(getInput(input))
-}
-
-func getInput(input string) []string {
-	bs, err := ioutil.ReadFile(input)
-	if err != nil {
-		panic(err)
-	}
-	return strings.Split(string(bs), "\n")
-}
-
-func compute(lines []string) (max, id uint16) {
-	var seats [1025]uint8
-	for _, line := range lines {
-		seat := parse(line)
-		seats[seat] = 1
-	}
-	for seats[id] == 0 {
-		id++
-	}
-	for seats[id] == 1 {
-		id++
-	}
-	max = id + 1
-	for seats[max] == 1 {
-		max++
-	}
-	max--
-	return
-}
-
-func parse(line string) (r uint16) {
-	for i := 0; i < 7; i++ {
-		r = r << 1
-		r += 1 - uint16((line[i]&4)>>2)
-	}
-	for i := 7; i < 10; i++ {
-		r = r << 1
-		r += uint16((line[i] & 2) >> 1)
-	}
-	return r
+	cmd.Execute()
 }

@@ -5,13 +5,6 @@ import (
 	"io/ioutil"
 	"os"
 	"strings"
-	"time"
-)
-
-var (
-	useAVX2 bool
-	useAVX  bool
-	useSSE4 bool
 )
 
 func main() {
@@ -62,9 +55,4 @@ func Parse(line string) (r uint16) {
 		r += uint16((line[i] & 2) >> 1)
 	}
 	return r
-}
-
-func t(start time.Time, function string) {
-	r := time.Since(start)
-	fmt.Printf("%s took %v\n", function, r)
 }

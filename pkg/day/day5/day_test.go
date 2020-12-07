@@ -10,14 +10,17 @@ const (
 	data = "assets/data/day5/input.txt"
 )
 
-var lines []string
+var lines string
+
+var first string
 
 func init() {
 	bs, err := ioutil.ReadFile(data)
 	if err != nil {
 		panic(err)
 	}
-	lines = strings.Split(string(bs), "\n")
+	lines = string(bs)
+	first = strings.Split(lines, "\n")[0]
 }
 
 func BenchmarkCompute(b *testing.B) {
@@ -28,7 +31,7 @@ func BenchmarkCompute(b *testing.B) {
 
 func BenchmarkParse(b *testing.B) {
 	for n := 0; n < b.N; n++ {
-		parse(lines[0])
+		parse(first)
 	}
 }
 

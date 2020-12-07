@@ -3,7 +3,7 @@ package framework
 import (
 	"errors"
 	"github.com/cfi2017/aoc-go/pkg/api"
-	"github.com/cfi2017/aoc-go/pkg/day5"
+	"github.com/cfi2017/aoc-go/pkg/day/day5"
 )
 
 var (

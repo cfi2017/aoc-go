@@ -1,21 +1,17 @@
 package day5
 
-import (
-	"strings"
-)
-
 type Day5 struct {
 }
 
 func (Day5) Solve(input string) (a, b int) {
-	max, id := compute(strings.Split(input, "\n"))
+	max, id := compute(input)
 	return int(max), int(id)
 }
 
-func compute(lines []string) (max, id uint16) {
+func compute(input string) (max, id uint16) {
 	var seats [1025]bool
-	for _, line := range lines {
-		seat := parse(line)
+	for i := 0; i < len(input); i += 11 {
+		seat := parse(input[i : i+10])
 		seats[seat] = true
 	}
 	for seats[id] {

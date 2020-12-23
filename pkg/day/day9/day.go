@@ -60,6 +60,21 @@ func corruptSumWindow(nums []uint64, corrupt uint64) []uint64 {
 	return nil
 }
 
+func corruptSumRecursive(nums []uint64, target uint64) []uint64 {
+	return recurse(nums, 0, 0, 0, target)
+}
+
+func recurse(nums []uint64, start, end, sum, target uint64) []uint64 {
+	sum += nums[start+end]
+	if sum == target {
+		return nums[start : start+end]
+	} else if sum < target {
+		return recurse(nums, start, end+1, sum, target)
+	} else { // sum > target
+		return recurse(nums, start+1, 0, sum, target)
+	}
+}
+
 func minIntSlice(nums []uint64) (m uint64) {
 	for i, e := range nums {
 		if i == 0 || e < m {

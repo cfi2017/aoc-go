@@ -35,3 +35,9 @@ func BenchmarkCorruptWindow(b *testing.B) {
 		corruptSumWindow(input, corrupt)
 	}
 }
+
+func BenchmarkCorruptRecursive(b *testing.B) {
+	for i := 0; i < b.N; i++ {
+		corruptSumRecursive(input, corrupt)
+	}
+}
